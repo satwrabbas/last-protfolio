@@ -13,6 +13,7 @@ import "./globals.css";
 // 1. استيراد الـ AuthProvider الذي أنشأناه
 // هذا هو السطر الأهم هنا. نحن نستورد المكون الذي يحتوي على منطق المصادقة.
 import { AuthProvider } from "./components/AuthProvider";
+import Header from "./components/Header";
 
 // إعداد الخطوط:
 // هنا نقوم بتهيئة الخطوط مع الخيارات اللازمة.
@@ -57,6 +58,7 @@ export default function RootLayout({
         {/* هذا يسمح لأي مكون، مهما كان عمقه في شجرة المكونات، بالوصول إلى بيانات المستخدم */}
         {/* التي يوفرها AuthProvider. */}
         <AuthProvider>
+          <Header/>
           {children}
         </AuthProvider>
       </body>
