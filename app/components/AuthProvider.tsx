@@ -33,6 +33,7 @@ export type Profile = {
   full_name: string | null;
   avatar_url: string | null;
   total_xp: number; // سنجلب الـ XP من هنا مستقبلاً
+  is_admin: boolean; 
 };
 
 // 2. تحديث نوع الـ Context ليشمل البيانات الجديدة
@@ -45,6 +46,7 @@ type AuthContextType = {
   subjectsProgress: SubjectProgress[];
   refreshXP: () => Promise<void>;
   updateLocalXP: (amount:number) => void;
+  isAdmin: boolean;
 };
 
 
@@ -57,11 +59,12 @@ const AuthContext = createContext<AuthContextType>({
   subjectsProgress: [],
   refreshXP: async () => {},
   updateLocalXP : () => {},
+  isAdmin: false,
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  
+   const [isAdmin, setIsAdmin] = useState(false);
   // حالات جديدة للـ XP والمستويات
   const [globalXp, setGlobalXp] = useState(0);
   const [globalLevel, setGlobalLevel] = useState(1);
@@ -70,6 +73,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // معادلة حساب المستوى: كلما زاد الـ XP أصبح الصعود للمستوى التالي أصعب قليلاً
   const calculateLevel = (xp: number) => Math.floor(1 + Math.sqrt(xp) / 5);
 
+  const checkAdmin = async (userId: string) => {
+    const { data } = await supabase
+      .from('profiles')
+      .select('is_admin')
+      .eq('id', userId)
+      .single();
+    
+    if (data?.is_admin) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  };
   // 3. الدالة الأساسية لحساب الخبرة
   const fetchXPData = async (userId: string) => {
     // نجلب الدروس المكتملة، ونطلب من Supabase جلب تفاصيل الدرس، الوحدة، والمادة المرتبطة به
@@ -94,18 +110,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('Error fetching XP:', error);
       return;
     }
-    // أضف هذا الجزء داخل fetchXPData أو بجانبه
-const { data: profileData } = await supabase
-  .from('profiles')
-  .select('*')
-  .eq('id', userId)
-  .single();
+    
 
-if (profileData) {
-  setProfile(profileData);
-  // ملاحظة: حالياً سنبقي حساب الـ XP كما هو (ديناميكي) حتى نربط التحديث بقاعدة البيانات
-  // لكن وجود البروفايل هنا يسمح لنا بعرض الاسم والصورة
-}
+    // أضف هذا الجزء داخل fetchXPData أو بجانبه
+    const { data: profileData } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    if (profileData) {
+      setProfile(profileData);
+      // ملاحظة: حالياً سنبقي حساب الـ XP كما هو (ديناميكي) حتى نربط التحديث بقاعدة البيانات
+      // لكن وجود البروفايل هنا يسمح لنا بعرض الاسم والصورة
+    }
 
     let totalGlobalXP = 0;
     const subjectsMap: Record<string, SubjectProgress> = {};
@@ -178,6 +196,7 @@ if (profileData) {
       if (session?.user) {
         // عند تسجيل الدخول، اجلب النقاط
         fetchXPData(session.user.id);
+        checkAdmin(session.user.id);
       } else {
         // عند تسجيل الخروج، صفر العدادات
         setGlobalXp(0);
@@ -199,7 +218,7 @@ if (profileData) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, globalXp, globalLevel, subjectsProgress, refreshXP,updateLocalXP }}>
+    <AuthContext.Provider value={{ user, profile, globalXp, globalLevel, subjectsProgress, refreshXP,updateLocalXP, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );

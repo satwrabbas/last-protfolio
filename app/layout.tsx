@@ -45,6 +45,12 @@ export default function RootLayout({
   return (
     // تعريف اللغة العربية ('ar') واتجاه النص من اليمين إلى اليسار ('rtl') على مستوى الصفحة بأكملها.
     <html lang="ar" dir="rtl">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </head>
       <body
         // دمج متغيرات الخطوط في اسم الكلاس (className) للـ body.
         // هذا يجعل الخطوط متاحة للاستخدام في أي مكان في التطبيق عبر متغيرات CSS.
@@ -58,7 +64,7 @@ export default function RootLayout({
         {/* هذا يسمح لأي مكون، مهما كان عمقه في شجرة المكونات، بالوصول إلى بيانات المستخدم */}
         {/* التي يوفرها AuthProvider. */}
         <AuthProvider>
-          <Header/>
+          <Header />
           {children}
         </AuthProvider>
       </body>

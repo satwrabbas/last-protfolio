@@ -59,53 +59,80 @@ export default function EditProfile() {
     }
     setLoading(false);
   };
-
-  return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-md border border-gray-700">
-        <h1 className="text-2xl font-bold text-white mb-6">تعديل الشخصية</h1>
+return (
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4 text-gray-100">
+      <div className="bg-gray-800 p-5 md:p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-700 relative overflow-hidden">
         
-        <div className="space-y-4">
+        {/* شريط جمالي علوي */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+
+        <h1 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
+          تعديل الملف الشخصي
+        </h1>
+        
+        <div className="space-y-4 md:space-y-5">
           <div>
-            <label className="block text-gray-400 mb-2 text-sm">اسم المستخدم (اللقب)</label>
+            <label className="block text-gray-400 mb-2 text-xs md:text-sm font-medium">
+              اسم المستخدم (اللقب)
+            </label>
             <input 
               type="text" 
               value={formData.username}
               onChange={(e) => setFormData({...formData, username: e.target.value})}
-              className="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white focus:border-indigo-500 outline-none"
+              // p-3: أفضل للموبايل (Touch target)
+              className="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all placeholder-gray-600"
+              placeholder="مثال: Ahmed_123"
             />
           </div>
           
           <div>
-            <label className="block text-gray-400 mb-2 text-sm">الاسم الكامل</label>
+            <label className="block text-gray-400 mb-2 text-xs md:text-sm font-medium">
+              الاسم الكامل
+            </label>
             <input 
               type="text" 
               value={formData.full_name}
               onChange={(e) => setFormData({...formData, full_name: e.target.value})}
-              className="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white focus:border-indigo-500 outline-none"
+              className="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all placeholder-gray-600"
+              placeholder="الاسم الحقيقي"
             />
           </div>
 
           <div>
-            <label className="block text-gray-400 mb-2 text-sm">نبذة عنك (Bio)</label>
+            <label className="block text-gray-400 mb-2 text-xs md:text-sm font-medium">
+              نبذة عنك (Bio)
+            </label>
             <textarea 
               value={formData.bio}
               onChange={(e) => setFormData({...formData, bio: e.target.value})}
-              className="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white focus:border-indigo-500 outline-none h-24"
+              className="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none h-24 resize-none transition-all placeholder-gray-600 leading-relaxed"
+              placeholder="اكتب شيئاً مختصراً عنك..."
             />
           </div>
 
-          <button 
-            onClick={updateProfile}
-            disabled={loading}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            {loading ? 'جاري الحفظ...' : 'حفظ التعديلات'}
-          </button>
-          
-          <Link href="/profile" className="block text-center text-gray-400 hover:text-white text-sm mt-4">
-            إلغاء
-          </Link>
+          <div className="pt-2 space-y-3">
+            <button 
+              onClick={updateProfile}
+              disabled={loading}
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg transition-all transform active:scale-95 shadow-lg shadow-indigo-900/20 flex justify-center items-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                  <span>جاري الحفظ...</span>
+                </>
+              ) : (
+                'حفظ التعديلات'
+              )}
+            </button>
+            
+            <Link 
+              href="/profile" 
+              className="block text-center text-gray-400 hover:text-white text-sm py-2 transition-colors hover:bg-gray-700/50 rounded-lg"
+            >
+              إلغاء والعودة
+            </Link>
+          </div>
         </div>
       </div>
     </div>
