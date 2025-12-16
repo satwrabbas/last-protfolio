@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
 import { login } from "./actions";
 import { useActionState } from "react";
-import { FaLock, FaBuilding } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 
 const initialState = {
   error: "",
@@ -25,7 +24,7 @@ export default function LoginPage() {
               {" "}
               <Image
                 src="/logo.svg"
-                alt="ABCE-S Logo"
+                alt="Our-Home Logo"
                 fill
                 className="object-cover rounded-xl group-hover:scale-105 transition duration-300"
                 sizes="(max-width: 768px) 48px, 48px"
@@ -33,9 +32,7 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-2xl font-bold text-white">تسجيل الدخول</h1>
-          <p className="text-slate-400 text-sm mt-2">
-            لوحة تحكم ABCE-S الهندسية
-          </p>
+          <p className="text-slate-400 text-sm mt-2">لوحة تحكم Our Home</p>
         </div>
 
         <form action={formAction} className="space-y-6">

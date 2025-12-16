@@ -5,7 +5,6 @@ import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import Footer from "./components/Footer";
 import Testimonials from "./components/Testimonials";
-import CTABanner from "./components/CTABanner";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -21,7 +20,6 @@ export default async function Home() {
       <Hero />
 
       <AboutSection />
-
       <ServicesSection />
       <Testimonials />
 

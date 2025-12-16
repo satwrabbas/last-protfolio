@@ -17,7 +17,7 @@ export default function AdminLayout({
       <aside className="w-full md:w-64 bg-slate-900 border-l border-white/5 flex-shrink-0">
         <div className="p-6 border-b border-white/5">
           <h2 className="text-xl font-bold text-white">لوحة التحكم</h2>
-          <span className="text-xs text-yellow-500">ABCE-S Admin</span>
+          <span className="text-xs text-yellow-500">Our Home Admin</span>
         </div>
 
         <nav className="p-4 space-y-2">

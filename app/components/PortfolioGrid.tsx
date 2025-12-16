@@ -53,7 +53,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
           <Link
             href={`/portfolio/${project.id}`}
             key={project.id}
-            className="group relative block aspect-[4/5] rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-2xl hover:border-yellow-500/50 transition-all duration-500"
+            className="group relative block aspect-4/5 rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-2xl hover:border-yellow-500/50 transition-all duration-500"
           >
             <Image
               src={project.image_url}
@@ -63,7 +63,7 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
             <div className="absolute top-4 right-4">
               <span className="px-3 py-1 text-xs font-bold bg-slate-950/50 backdrop-blur-md text-white border border-white/10 rounded-full">

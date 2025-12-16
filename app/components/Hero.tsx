@@ -5,11 +5,9 @@ import {
   FaCheckCircle,
   FaProjectDiagram,
   FaHardHat,
-  FaDraftingCompass,
-  FaTools,
 } from "react-icons/fa";
-import { FaBuilding } from "react-icons/fa6";
 import { FaFileDownload, FaStar } from "react-icons/fa";
+import Image from "next/image";
 
 export default async function Hero() {
   const supabase = await createClient();
@@ -20,13 +18,13 @@ export default async function Hero() {
     .limit(3)
     .order("created_at", { ascending: false });
   return (
-    <div>
+    <div id="home">
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-10" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
 
         <div className="relative z-20 text-center max-w-4xl px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-white to-gray-400">
             نبني رؤيتك.. حجراً تلو الآخر
           </h1>
           <p className="text-xl text-text-muted mb-8 leading-relaxed">
@@ -50,10 +48,10 @@ export default async function Hero() {
         </div>
       </section>
 
-      <section className="py-20 bg-surface/30">
+      <section className="md:py-20 py-10 bg-surface/30">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-end mb-12">
-            <h2 className="text-3xl font-bold border-r-4 border-accent pr-4">
+            <h2 className="md:text-3xl text-xl font-bold border-r-4 border-accent pr-4">
               آخر مشاريعنا
             </h2>
             <Link
@@ -75,7 +73,7 @@ export default async function Hero() {
                   alt={project.title}
                   className="object-cover w-full h-full group-hover:scale-105 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                   <span className="text-accent text-sm font-medium">
                     {project.category}
                   </span>
@@ -100,7 +98,7 @@ export default async function Hero() {
               "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
           }}
         >
-          <div className="absolute inset-0 bg-slate-950/70 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-slate-950/70 bg-linear-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10">
@@ -113,7 +111,7 @@ export default async function Hero() {
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
             نحول الخيال إلى{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-yellow-400 to-yellow-600">
               واقع معماري
             </span>
           </h1>
@@ -128,7 +126,7 @@ export default async function Hero() {
               href="/company-profile.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-slate-900 font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] flex items-center justify-center gap-3"
+              className="group w-full sm:w-auto px-8 py-4 bg-linear-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-slate-900 font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:shadow-[0_0_30px_rgba(234,179,8,0.5)] flex items-center justify-center gap-3"
             >
               <span>تحميل بروفايل الشركة</span>
 
