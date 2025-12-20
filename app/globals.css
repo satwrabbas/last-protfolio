@@ -16,7 +16,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* هذا الكود يخبر المتصفح أن يترك مسافة فوق العنصر عند الانتقال إليه */
+
 #home, #about, #services {
   scroll-margin-top: 90px;
 }

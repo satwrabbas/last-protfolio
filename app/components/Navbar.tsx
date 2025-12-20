@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -28,33 +27,32 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-  const handleHashScroll = () => {
-    // الحصول على الهاش من الرابط (مثلاً #about)
-    const hash = window.location.hash;
-    
-    if (hash && pathname === "/") {
-      const id = hash.replace("#", "");
-      const element = document.getElementById(id);
-      
-      if (element) {
-        // ننتظر قليلاً لضمان استقرار الصفحة بعد الانتقال
-        setTimeout(() => {
-          const yOffset = -80; // تعويض ارتفاع الناف بار
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }, 300); // زيادة الوقت لـ 300ms لضمان نجاح العملية بعد التنقل بين الصفحات
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+
+      if (hash && pathname === "/") {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+
+        if (element) {
+          setTimeout(() => {
+            const yOffset = -80;
+            const y =
+              element.getBoundingClientRect().top +
+              window.pageYOffset +
+              yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }, 300);
+        }
       }
-    }
-  };
+    };
 
-  // تشغيل الدالة عند تغيير المسار (الانتقال من صفحة لأخرى)
-  handleHashScroll();
+    handleHashScroll();
 
-  // تشغيل الدالة عند تغيير الهاش (الضغط على رابط في نفس الصفحة)
-  window.addEventListener("hashchange", handleHashScroll);
-  
-  return () => window.removeEventListener("hashchange", handleHashScroll);
-}, [pathname]); // سيعمل في كل مرة يتغير فيها المسار
+    window.addEventListener("hashchange", handleHashScroll);
+
+    return () => window.removeEventListener("hashchange", handleHashScroll);
+  }, [pathname]);
 
   if (pathname.startsWith("/admin") || pathname.startsWith("/login")) {
     return null;

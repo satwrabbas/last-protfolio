@@ -1,10 +1,9 @@
-// app/admin/projects/DeleteButton.tsx
-'use client'; // ضروري جداً
+"use client";
 
-import { useState } from 'react';
-import Swal from 'sweetalert2';
-import { FaTrash } from 'react-icons/fa';
-import { deleteProject } from '../actions'; // تأكد أن مسار استيراد الأكشن صحيح
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { FaTrash } from "react-icons/fa";
+import { deleteProject } from "../actions";
 
 interface DeleteButtonProps {
   id: string;
@@ -15,47 +14,42 @@ export default function DeleteButton({ id, imageUrl }: DeleteButtonProps) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteClick = async () => {
-    // 1. إظهار رسالة التأكيد
     const result = await Swal.fire({
-      title: 'هل أنت متأكد؟',
+      title: "هل أنت متأكد؟",
       text: "سيتم حذف المشروع والصورة المرتبطة به نهائياً!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'نعم، احذف',
-      cancelButtonText: 'إلغاء',
-      background: '#1e293b', // لون خلفية داكن ليناسب تصميمك
-      color: '#fff' // لون النص أبيض
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "نعم، احذف",
+      cancelButtonText: "إلغاء",
+      background: "#1e293b",
+      color: "#fff",
     });
 
     if (result.isConfirmed) {
       setIsDeleting(true);
       try {
-        // 2. تجهيز البيانات كما يتوقعها السيرفر (FormData)
         const formData = new FormData();
-        formData.append('id', id);
-        formData.append('image_url', imageUrl);
+        formData.append("id", id);
+        formData.append("image_url", imageUrl);
 
-        // 3. استدعاء دالة الحذف
         await deleteProject(formData);
 
-        // 4. رسالة النجاح
         Swal.fire({
-          title: 'تم الحذف!',
-          text: 'لقد تم حذف المشروع بنجاح.',
-          icon: 'success',
-          background: '#1e293b',
-          color: '#fff'
+          title: "تم الحذف!",
+          text: "لقد تم حذف المشروع بنجاح.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
         });
-        
       } catch (error) {
         Swal.fire({
-          title: 'خطأ',
-          text: 'حدثت مشكلة أثناء الحذف',
-          icon: 'error',
-          background: '#1e293b',
-          color: '#fff'
+          title: "خطأ",
+          text: "حدثت مشكلة أثناء الحذف",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
         });
       } finally {
         setIsDeleting(false);
