@@ -88,7 +88,6 @@ export default async function Hero() {
       </section>
 
       <section
-        id="home"
         className="relative h-screen w-full overflow-hidden flex items-center justify-center"
       >
         <div
