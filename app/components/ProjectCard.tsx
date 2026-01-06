@@ -32,12 +32,19 @@ export default function ProjectCard({ project, lang }: ProjectProps) {
 
   return (
     <div className="group relative bg-zinc-900 border border-zinc-800 rounded-xl md:rounded-2xl overflow-hidden hover:border-zinc-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+      
+      {/* 
+         التعديل الأول:
+         جعلنا z-10 بدلاً من z-0
+         هذا يجعل الرابط الشفاف "يطفو" فوق الصور والنصوص
+      */}
       <Link
         href={`/project/${project.id}`}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-10"
         aria-label={title}
       />
 
+      {/* منطقة الصور */}
       <div className="relative w-full border-b border-zinc-800 bg-zinc-950">
         {hasMobileImage && (
           <div className="block md:hidden aspect-[9/16] relative">
@@ -71,9 +78,11 @@ export default function ProjectCard({ project, lang }: ProjectProps) {
           )}
         </div>
 
-        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors pointer-events-none" />
       </div>
 
+      {/* المحتوى النصي */}
+      {/* pointer-events-none مهمة جداً هنا لتمرير النقرة للرابط الخلفي */}
       <div className="p-4 md:p-6 relative pointer-events-none flex-1 flex flex-col">
         <h3 className="text-lg md:text-xl font-bold text-zinc-100 mb-1 md:mb-2 group-hover:text-white transition-colors truncate">
           {title}
@@ -94,7 +103,12 @@ export default function ProjectCard({ project, lang }: ProjectProps) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-zinc-800 relative z-10 pointer-events-auto">
+        {/* 
+            التعديل الثاني:
+            جعلنا z-20 بدلاً من z-10
+            لكي تكون الأزرار فوق الرابط الشفاف (الذي أصبح z-10) فتستجيب للنقر
+        */}
+        <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-zinc-800 relative z-20 pointer-events-auto">
           {project.demo_url && (
             <a
               href={project.demo_url}
