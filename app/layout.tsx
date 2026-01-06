@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import { LanguageProvider } from "./context/LanguageContext";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -10,12 +10,12 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  title: "Our Home | مكتب هندسي عقاري",
-  description: "تصميم، إكساء، وتنفيذ مشاريع هندسية في مصياف.",
+  title: "ABCE",
+  description: "protfolio",
   icons: {
-    icon: "/small-logo.png",
-    shortcut: "/small-logo.png",
-    apple: "/small-logo.png",
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
   },
 };
 
@@ -29,9 +29,7 @@ export default function RootLayout({
       <body
         className={`${tajawal.className} antialiased bg-slate-950 text-slate-50`}
       >
-        <Navbar />
-
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

@@ -1,25 +1,18 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig ={
+const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'www.facebook.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', 
+      },
+      {
+        protocol: 'https',
         hostname: '**.supabase.co', 
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com', 
-      },
-         {
-        protocol: 'https',
-        hostname: 'images.unsplash.com', 
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'unsplash.com', 
-        port: '',
       },
     ],
   },
