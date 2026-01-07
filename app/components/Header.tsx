@@ -39,15 +39,17 @@ export default function Header({ onContactClick }: HeaderProps) {
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6 flex justify-between items-center">
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="relative w-9 h-9 md:w-12 md:h-12 bg-white/10 rounded-xl overflow-hidden">
+          <div className="relative w-9 h-9 md:w-12 md:h-12 bg-white/10 rounded-xl overflow-hidden flex items-center justify-center shadow-inner border border-white/5">
             <Image
               src="/logo.svg"
               alt="Logo"
-              width={48}
-              height={48}
-              className="object-contain"
+              fill
+              sizes="(max-width: 768px) 36px, 48px"
+              className="object-cover"
+              priority
             />
           </div>
+
           <span className="text-lg md:text-xl font-bold font-mono tracking-tighter text-zinc-100">
             ABCE-S
           </span>
